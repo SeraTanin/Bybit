@@ -35,8 +35,6 @@ for i in range(10):
     else:
         print(i)
 
-
 if __name__ == '__main__':
     check_to_repeat()
     # print(get_pair_name())
-

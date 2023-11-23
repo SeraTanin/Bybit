@@ -7,8 +7,14 @@ import telebot
 from datetime import datetime as dt
 import os
 from to_open import check_to_repeat, get_pair_name
+from dotenv import load_dotenv
+
+load_dotenv()
+TELEGRAM_TOKEN = os.getenv('token')
+TELEGRAM_CHAT_ID = os.getenv('chat_id')
 
 
+# todo: get more functionality
 def get_public_symbols():
     url = "https://api.bybit.com/spot/v3/public/symbols"
     payload = {}
@@ -182,12 +188,10 @@ def send_data_to_telegram():
     now = dt.now()
     time_current = f"{now:%d.%m.%Y %H:%M}"
     document = Path(Path.home(), "PycharmProjects", "Bybit", Path("Data.csv"))
-    token = '6177235390:AAF7rL-_M-fNWzWBOe97yNVYTNS8LzNrO4Y'
-    bot = telebot.TeleBot(token)
-    chat_id = '5797350123'
-    bot.send_message(chat_id, time_current)
+    bot = telebot.TeleBot(TELEGRAM_TOKEN)
+    bot.send_message(TELEGRAM_CHAT_ID, time_current)
     f = open(document)
-    bot.send_document(chat_id, f)
+    bot.send_document(TELEGRAM_CHAT_ID, f)
 
 
 if __name__ == '__main__':
